@@ -1,12 +1,10 @@
 <?php
 session_start();
-require_once 'cnx.php';
-$sql = "SELECT * FROM personnes";
-
-$results = $pdo->query($sql);
+require 'cnx.inc.php';
+$personnes = Model::factory('personnes')->findMany();
 
 //je souhaite un tableau avec le nom de champs de la BDD SQL
-$personnes = $results->fetchAll(PDO::FETCH_ASSOC);
+//$personnes = $results->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -64,10 +62,10 @@ $personnes = $results->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($personnes as $key => $personne) { ?>
                         <tr>
 
-                            <td><?= $personne["prenom"] ?></td>
-                            <td><?= $personne["nom"] ?></td>
-                            <td><?= $personne["age"] ?></td>
-                            <td><a href="controller-delete.php?id=<?= $personne["id"] ?>" class="btn btn-danger">
+                            <td><?= $personne->prenom ?></td>
+                            <td><?= $personne->nom ?></td>
+                            <td><?= $personne->age ?></td>
+                            <td><a href="controller-delete.php?id=<?= $personne->id ?>" class="btn btn-danger">
                                     <i class="fa fa-trash"></i>
                                 </a></td>
                         </tr>
