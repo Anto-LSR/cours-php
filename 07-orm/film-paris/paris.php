@@ -184,7 +184,7 @@
      * This documentation exposes these methods to doc generators and IDEs.
      * @see http://www.php-fig.org/psr/psr-1/
      *
-     * @method void setOrm($orm)
+     * @method void setOrm($07-orm)
      * @method $this setExpr($property, $value = null)
      * @method bool isDirty($property)
      * @method bool isNew()
