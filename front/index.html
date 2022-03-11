@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo AJAX</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+<div class="container my-5">
+    <button class="btn btn-primary" onclick="afficher()">Afficher Liste</button>
+    <button class="btn btn-success" onclick="ajouter()">Ajouter une personne</button>
+    <button class="btn btn-danger" onclick="supprimer()">Ajouter une personne</button>
+    <div class="col-6">
+        <table class="table">
+            <tbody id="liste">
+            <template id="modele">
+                <tr>
+                    <td class="prenom"></td>
+                    <td class="nom"></td>
+                </tr>
+            </template>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
+        integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+    function afficher() {
+        let url = '../08-api/personnes/';
+        axios.get(url)
+            .then((res) => {
+
+                console.log(res.data)
+                let tab = res.data
+                let tbody = document.querySelector('#liste');
+                let template = document.querySelector('#modele');
+
+                for (let p of tab) {
+                    let clone = template.content.cloneNode(true);
+                    clone.querySelector('.nom').innerHTML = p.nom;
+                    clone.querySelector('.prenom').innerHTML = p.prenom;
+                    tbody.append(clone);
+                }
+
+
+            })
+    }
+
+    function ajouter(){
+        let url = '../08-api/personnes/';
+        let personne = {last: "L'Eponge", first: "Bob", age:"23"};
+        axios.post(url, personne).then((res) => {
+            let id = res.data.id;
+            console.log(id)
+        })
+    }
+
+    function supprimer(){
+        let id = 7;
+        let url = '../08-api/personnes/' + id;
+        axios.delete(url).then((res)=> {
+            console.log(res.data)
+        })
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 <?php
-require_once 'cnx.php';
+require_once 'cnx.inc.php';
 if(isset($_GET["id"])){
     $id = $_GET['id'];
     $personne = Model::factory('personnes')->findOne($id)->delete();

@@ -7,7 +7,7 @@ if ((isset($_POST["first"])) && (isset($_POST["last"])) && (isset($_POST["age"])
         $last = $_POST["last"];
         $age = $_POST["age"];
 
-        $personne = Model::factory('personnes')->create();
+        $personne = Model::factory('Personnes')->create();
         $personne->prenom = $first;
         $personne->nom = $last;
         $personne->age = $age;
@@ -19,4 +19,5 @@ if ((isset($_POST["first"])) && (isset($_POST["last"])) && (isset($_POST["age"])
     }
 
 } else {
+
 }

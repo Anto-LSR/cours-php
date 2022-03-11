@@ -1,0 +1,7 @@
+RewriteEngine on
+# personne/5 -> index.php?id=5
+
+RewriteRule ^personnes/([0-9]+) index.php?id=$1 [L]
+
+# personne/ -> index.php
+RewriteRule ^personnes/ index.php
